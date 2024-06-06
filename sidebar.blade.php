@@ -250,12 +250,13 @@
 
                     </li>
                 @endcan
-                <li {{ Auth::guard('satker')?'':'hidden' }} class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {{ request()->is(['datamedia/*']) ? 'show':'' }}"
-                       href="#navbar-base"
-                       data-bs-toggle="dropdown"
-                       data-bs-auto-close="false" role="button"
-                       aria-expanded=" {{ request()->is(['datamedia/*']) ? 'true':'' }} ">
+                @canany(['humas_kanwil','admin'])
+                    <li {{ Auth::guard('satker')?'':'hidden' }} class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ request()->is(['datamedia/*']) ? 'show':'' }}"
+                           href="#navbar-base"
+                           data-bs-toggle="dropdown"
+                           data-bs-auto-close="false" role="button"
+                           aria-expanded=" {{ request()->is(['datamedia/*']) ? 'true':'' }} ">
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -263,24 +264,26 @@
                                 d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"/><path d="M12 12l8 -4.5"/><path
                                 d="M12 12l0 9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg>
                   </span>
-                        <span class="nav-link-title">
+                            <span class="nav-link-title">
                             {{--ASLIII--}}
-                            Data Media Partner
+                                Data Media Partner
                   </span>
-                    </a>
-                    <div class="dropdown-menu {{ request()->is(['datamedia']) ? 'show':'' }}">
-                        <div class="dropdown-menu-columns">
-                            <div class="dropdown-menu-column">
-                                <a style="font-size: 9px; "
-                                   class="dropdown-item {{ request()->is(['datamedia']) ? 'active':'' }} "
-                                   href="{{ route('datamedia') }}">
-                                    MEDIA PARTNERS
-                                </a>
+                        </a>
+                        <div class="dropdown-menu {{ request()->is(['datamedia']) ? 'show':'' }}">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <a style="font-size: 9px; "
+                                       class="dropdown-item {{ request()->is(['datamedia']) ? 'active':'' }} "
+                                       href="{{ route('datamedia') }}">
+                                        MEDIA PARTNERS
+                                    </a>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                @endcanany
+
                 <li {{ Auth::guard('satker')?'':'hidden' }} class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->is(['datasatker/*']) ? 'show':'' }}"
                        href="#navbar-base"
