@@ -139,7 +139,7 @@
                                                             </svg>
                                                         </a>
                                                         <a href="#" class="tampilkandetail btn btn-warning btn-sm"
-                                                           id_berita="{{ $d->id_berita }}"
+                                                           kode_media="{{ $d->kode_media }}"
                                                            style="margin-right: 5px; border-radius: 5px; margin-left:8px ; background-color: orange">
                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                  class="icon icon-tabler icon-tabler-file-description"
@@ -158,7 +158,7 @@
                                                             @csrf
                                                             {{--cara hack form method--}}
                                                             {{--@method('DELETE')--}}
-                                                            <a class="btn btn-danger btn-sm delete-confirm" style="border-radius: 5px;">
+                                                            <a class="btn btn-danger btn-sm delete-confirm" style="border-radius: 5px; height: 23px;">
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                      class="icon icon-tabler icon-tabler-trash-filled"
                                                                      width="24" height="24" viewBox="0 0 24 24"
@@ -347,6 +347,20 @@
         </div>
     </div>
 
+    <div class="modal modal-blur fade" id="modal-tampilkandetail" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detail Data Media</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="loadedittampilkandetail">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{--modal untuk edit--}}
     {{--Modal Edit--}}
     <div class="modal modal-blur fade" id="modal-editmedia" tabindex="-1" role="dialog" aria-hidden="true">
@@ -488,6 +502,27 @@
                     });
                     return false;
                 }
+            });
+
+            $('.tampilkandetail').click(function(){
+                var kode_media = $(this).attr('kode_media');
+                //alert(kode_media);
+                //return false;
+                $.ajax({
+                    type : 'POST',
+                    url : '{{ route('tampilkandetailmedia') }}',
+                    cache : false,
+                    data : {
+                        _token: "{{ csrf_token() }}",
+                        kode_media: kode_media,
+                    },
+                    success: function(respond){
+                        //console.log(respond);
+                        //return false;
+                        $('#loadedittampilkandetail').html(respond);
+                    },
+                });
+                $('#modal-tampilkandetail').modal('show');
             });
         });
     </script>

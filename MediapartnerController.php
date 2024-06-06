@@ -21,6 +21,10 @@ class MediapartnerController extends Controller
     {
         //return "tes data media partner"; die;
         //$this->authorize('admin');
+        //echo auth()->user()->roles; die;
+        if(auth()->user()->roles=="humas_satker"){
+            abort(403);
+        }
         $query = Mediapartner::query();
         //$find = Mediapartner::find(48);
         //dd($find->id_media);
@@ -417,6 +421,17 @@ class MediapartnerController extends Controller
         }
 
 
+    }
+
+    public function tampilkandetailmedia(Request $request)
+    {
+        $kode_media = $request->kode_media;
+        //return $request->kode_media;
+        //dd($id_berita);
+        $datamedia = DB::table('mediapartner')->where('kode_media', $kode_media)->first();
+        //dd($databerita->media_lokal);
+        //dd($datamedia);
+        return view('mediapartner.detail', compact('datamedia'));
     }
 
     public function tampilkandetailberita(Request $request)
