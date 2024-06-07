@@ -1,5 +1,6 @@
 <div class="container" id="id_berita" name="id_berita" id_berita="">
     <div class="card mt-1">
+        {{--ASLIII--}}
         <form id="frmGenereteWaToday" name="frmGenereteWaToday"
               class="" sizeBerita="{{ $sizeBerita }}" kode_satker_value="{{ $kode_satker_value }}"
               action="{{ route('whatssapgenerate_message_today') }}" method="post">
